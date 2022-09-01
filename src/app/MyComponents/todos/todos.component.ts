@@ -35,4 +35,8 @@ export class TodosComponent implements OnInit {
     console.log("Todo deleted!");
     
   }
+
+  addTodo(todo: Todo){
+    this.todos.push(todo);
+  }
 }

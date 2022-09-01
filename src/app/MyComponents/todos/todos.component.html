@@ -1,6 +1,10 @@
-<!-- <ul *ngFor="let todo of todos">
-    <li>{{todo.sno}} - {{todo.title}} - {{todo.desc}}</li>
-</ul> -->
-<ul *ngFor="let todo of todos">
-    <app-todo-item [todo] = "todo" (todoDelete)="deleteTodo($event)"></app-todo-item>
-</ul>
+<div class="container">
+  <app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
+  <h4>Your todos:</h4>
+  <div *ngIf="this.todos.length===0; else elseBlock">No todos to display.</div>
+  <ng-template #elseBlock>
+    <ul *ngFor="let todo of todos" #elseBlock>
+      <app-todo-item [todo]="todo" (todoDelete)="deleteTodo($event)"></app-todo-item>
+    </ul>
+  </ng-template>
+</div>
