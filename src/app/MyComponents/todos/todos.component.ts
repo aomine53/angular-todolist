@@ -1,42 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import {Todo} from '../../Todo';
+import { Todo } from '../../Todo';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
-  styleUrls: ['./todos.component.css']
+  styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
-
-  todos:Todo[];
-  constructor() { 
-    this.todos=[
-      {
-        sno: 1,
-        title: "This is title",
-        desc: "This is description",
-        active: true
-      }, 
-      {
-        sno: 2,
-        title: "This is title",
-        desc: "This is description",
-        active: true
-      }
-    ]
+  todos: Todo[];
+  constructor() {
+    this.todos = JSON.parse(localStorage.getItem('todos') || '{}');
+    // Trying to do same thing in understable manner but doesn't work :\
+    // if(localStorage.getItem('todos') == null){
+    //   this.todos = [];
+    // }else{
+    //   this.todos = JSON.parse(localStorage.getItem('todos'));
+    // }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  deleteTodo(todo : Todo){
-    const index = this.todos.indexOf(todo);    
+  deleteTodo(todo: Todo) {
+    const index = this.todos.indexOf(todo);
     this.todos.splice(index, 1);
-    console.log("Todo deleted!");
-    
+    console.log('Todo deleted!');
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
-  addTodo(todo: Todo){
+  addTodo(todo: Todo) {
+    console.log('Todo added');
     this.todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 }
