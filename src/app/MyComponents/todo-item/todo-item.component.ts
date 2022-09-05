@@ -9,15 +9,17 @@ import { Todo } from '../../Todo';
 export class TodoItemComponent implements OnInit {
   @Input() todo : Todo;
   @Output() todoDelete: EventEmitter<Todo> = new EventEmitter();
+  @Output() todoCheck: EventEmitter<Todo> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onClick(todo : Todo){
-    this.todoDelete.emit(todo);
-    console.log("onClick has been triggered!");
-    
+    this.todoDelete.emit(todo);   
   }
 
+  onCheckboxClick(todo : Todo){
+    this.todoCheck.emit(todo);
+  }
 }

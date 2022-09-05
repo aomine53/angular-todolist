@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../Todo';
 
@@ -19,6 +20,12 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  
+  addTodo(todo: Todo) {
+    this.todos.push(todo);
+    console.log('Todo added');
+    localStorage.setItem('todos', JSON.stringify(this.todos));
+  }
 
   deleteTodo(todo: Todo) {
     const index = this.todos.indexOf(todo);
@@ -27,9 +34,9 @@ export class TodosComponent implements OnInit {
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
-  addTodo(todo: Todo) {
-    console.log('Todo added');
-    this.todos.push(todo);
+  toggleTodo(todo: Todo){
+    const index = this.todos.indexOf(todo);
+    this.todos[index].active = !this.todos[index].active;
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 }
