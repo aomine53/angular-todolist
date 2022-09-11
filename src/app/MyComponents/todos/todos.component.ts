@@ -10,6 +10,15 @@ import { Todo } from '../../Todo';
 export class TodosComponent implements OnInit {
   todos: Todo[];
   constructor() {
+    this.todos = [
+      {
+        sno: 1,
+        title: "Demo todo!",
+        desc: "Demo description",
+        active: true
+      }
+    ]
+    localStorage.setItem('todos', JSON.stringify(this.todos));
     this.todos = JSON.parse(localStorage.getItem('todos') || '{}');
     // Trying to do same thing in understable manner but doesn't work :\
     // if(localStorage.getItem('todos') == null){
