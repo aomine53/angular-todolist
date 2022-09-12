@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../Todo';
 
@@ -10,22 +9,19 @@ import { Todo } from '../../Todo';
 export class TodosComponent implements OnInit {
   todos: Todo[];
   constructor() {
-    this.todos = [
-      {
-        sno: 1,
-        title: "Demo todo!",
-        desc: "Demo description",
-        active: true
-      }
-    ]
-    localStorage.setItem('todos', JSON.stringify(this.todos));
+    if(localStorage.getItem('todos')===null){
+
+      this.todos = [
+        {
+          sno: 1,
+          title: "Demo todo!",
+          desc: "Demo description",
+          active: true
+        }
+      ]
+      localStorage.setItem('todos', JSON.stringify(this.todos));
+    }
     this.todos = JSON.parse(localStorage.getItem('todos') || '{}');
-    // Trying to do same thing in understable manner but doesn't work :\
-    // if(localStorage.getItem('todos') == null){
-    //   this.todos = [];
-    // }else{
-    //   this.todos = JSON.parse(localStorage.getItem('todos'));
-    // }
   }
 
   ngOnInit(): void {}
